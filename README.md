@@ -1,70 +1,63 @@
-# Getting Started with Create React App
+# Getting Started 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+yarn
 
-## Available Scripts
+For configuration and how to setup the send notification flow follow:
 
-In the project directory, you can run:
+### setup your firebase cloud messaging
 
-### `npm start`
+## use postman
+In the next following steps, we’ll be using Postman to send notifications using Firebase’s Cloud Messaging service.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+In Postman, create a POST request with the following information:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+    Request URL: https://fcm.googleapis.com/fcm/send
 
-### `npm test`
+    Headers: In the headers of your POST request, you’ll need to have the following keys:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Authorization: key=SERVER_KEY
 
-### `npm run build`
+Content-Type: application/json
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Notes: SERVER_KEY can be found under the Cloud Messaging tab in your Firebase settings
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+    Body: Fill the body of your POST request with the following code:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+{
+    "notification": {
+        "title": "SimiCart",
+        "body": "Test push notification",
+        "click_action": "http://localhost:3000/",
+        "icon": "https://i.imgur.com/5zO5cce.png"
+    }
+    "to": "USER_TOKEN"
+}
 
-### `npm run eject`
+Replace USER_TOKEN with the token that you obtained (by clicking on the Click to receive notifications button) in Step 4. Don’t forget to choose Body type as raw and JSON
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Now click on Send and you should see a notification popping up i
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Notes: These notifications only appear when the app is in the background or minimized.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Congratulations! Your PWA can now send notifications!
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## use firebase UI
 
-## Learn More
+Inside your firebase console, go to Cloud messaging section of the app
+Cloud Messaging
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+    Click the button Send your first message.
+    Enter the notification title and text.
+    Select Send test message.
+    In the field labeled Add an FCM registration token, enter the registration token you obtained from previous step.
+    Click Test
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+Based on tutorials:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+https://levelup.gitconnected.com/show-push-notifications-in-react-449949e98e01
 
-### Analyzing the Bundle Size
+https://www.simicart.com/blog/pwa-push-notifications/ (bit outdated)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
